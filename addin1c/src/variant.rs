@@ -18,7 +18,7 @@ pub struct Variant<'a> {
 
 #[allow(dead_code)]
 impl<'a> Variant<'a> {
-    pub fn get(&self) -> ParamValue {
+    pub fn get(&self) -> ParamValue<'_> {
         ParamValue::from(self.variant as &_)
     }
 

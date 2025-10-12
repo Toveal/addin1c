@@ -1,19 +1,8 @@
-use std::{ffi::c_void, fmt, ops::Deref};
+use std::{ffi::c_void, ops::Deref};
 
 use crate::ffi::{CreateMemoryManager, DeleteMemoryManager, FreeMemory};
 
 pub struct MemoryManager(*const c_void);
-
-#[derive(Debug)]
-pub struct AllocError(usize);
-
-impl fmt::Display for AllocError {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "Failed to allocate {} bytes", self.0)
-    }
-}
-
-impl std::error::Error for AllocError {}
 
 impl MemoryManager {
     pub fn new() -> Self {

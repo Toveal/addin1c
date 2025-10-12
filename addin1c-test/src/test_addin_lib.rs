@@ -100,7 +100,7 @@ impl TestAddinLib {
         }
     }
 
-    pub fn new_addin(&self, name: &str) -> Result<TestAddinObject, Box<dyn Error>> {
+    pub fn new_addin(&self, name: &str) -> Result<TestAddinObject<'_>, Box<dyn Error>> {
         let class = self.classes.get(name).ok_or("Class not found")?;
         let component = self.get_class_object(class)?;
         let object = TestAddinObject::new(self, component);
