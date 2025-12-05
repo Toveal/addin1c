@@ -206,11 +206,13 @@ impl<T> Methods<T> {
 
 pub struct MethodInfo<T> {
     pub name: &'static CStr1C,
+    pub name_ru: &'static CStr1C,
     pub method: Methods<T>,
 }
 
 pub struct PropInfo<T> {
     pub name: &'static CStr1C,
+    pub name_ru: &'static CStr1C,
     pub getter: Option<fn(&mut T, &mut Variant) -> AddinResult>,
     pub setter: Option<fn(&mut T, &Variant) -> AddinResult>,
 }
@@ -263,11 +265,16 @@ impl<T: Addin + 'static> ffi::Addin for T {
     }
 
     fn find_prop(&mut self, name: &CStr1C) -> Option<usize> {
-        T::properties().iter().position(|x| x.name == name)
+        T::properties()
+            .iter()
+            .position(|x| x.name == name || x.name_ru == name)
     }
 
     fn get_prop_name(&mut self, num: usize, alias: usize) -> Option<&'static CStr1C> {
-        T::properties().get(num).map(|x| &x.name).copied()
+        T::properties()
+            .get(num)
+            .map(|x| if alias == 0 { &x.name } else { &x.name_ru })
+            .copied()
     }
 
     fn get_prop_val(&mut self, num: usize, val: &mut Variant) -> bool {
@@ -316,11 +323,16 @@ impl<T: Addin + 'static> ffi::Addin for T {
     }
 
     fn find_method(&mut self, name: &CStr1C) -> Option<usize> {
-        T::methods().iter().position(|x| x.name == name)
+        T::methods()
+            .iter()
+            .position(|x| x.name == name || x.name_ru == name)
     }
 
     fn get_method_name(&mut self, num: usize, alias: usize) -> Option<&'static CStr1C> {
-        T::methods().get(num).map(|x| &x.name).copied()
+        T::methods()
+            .get(num)
+            .map(|x| if alias == 0 { &x.name } else { &x.name_ru })
+            .copied()
     }
 
     fn get_n_params(&mut self, num: usize) -> usize {

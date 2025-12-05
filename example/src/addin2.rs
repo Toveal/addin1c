@@ -130,30 +130,37 @@ impl SimpleAddin for Addin2 {
         &[
             MethodInfo {
                 name: name!("Method1"),
+                name_ru: name!("Метод1"),
                 method: Methods::Method1(Self::method1),
             },
             MethodInfo {
                 name: name!("Method2"),
+                name_ru: name!("Метод2"),
                 method: Methods::Method2(Self::method2),
             },
             MethodInfo {
                 name: name!("Panic1"),
+                name_ru: name!("Паника2"),
                 method: Methods::Method0(Self::panic1),
             },
             MethodInfo {
                 name: name!("Panic2"),
+                name_ru: name!("Паника2"),
                 method: Methods::Method0(Self::panic2),
             },
             MethodInfo {
                 name: name!("MethodNoParams"),
+                name_ru: name!("МетодБезПараметров"),
                 method: Methods::Method0(Self::method_no_params),
             },
             MethodInfo {
                 name: name!("Utc"),
+                name_ru: name!("Utc"),
                 method: Methods::Method0(Self::utc),
             },
             MethodInfo {
                 name: name!("CallExternalEvent"),
+                name_ru: name!("ВызватьВнешнееСобытие"),
                 method: Methods::Method0(Self::call_external_event),
             },
         ]
@@ -163,11 +170,13 @@ impl SimpleAddin for Addin2 {
         &[
             PropInfo {
                 name: name!("Prop1"),
+                name_ru: name!("Свойство1"),
                 getter: Some(Self::get_prop1),
                 setter: Some(Self::set_prop1),
             },
             PropInfo {
                 name: name!("LastError"),
+                name_ru: name!("ПоследняяОшибка"),
                 getter: Some(Self::last_error),
                 setter: None,
             },
